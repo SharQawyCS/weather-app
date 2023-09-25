@@ -15,15 +15,32 @@ export default function WeatherCard({
   t, //Translation Function From i18n.js
   content,
 }) {
+  //To Convert English Numbers To Arabic Numbers When Locale = "ar"
+  const c = (num) => {
+    if (locale === "ar") {
+      const arabicNumbers =
+        "\u0660\u0661\u0662\u0663\u0664\u0665\u0666\u0667\u0668\u0669";
+      let str = num.toString().replace(/[0123456789]/g, (d) => {
+        return arabicNumbers[d];
+      });
+      return (<>{str}</>).props.children;
+    } else {
+      return num;
+    }
+  };
+
+  console.log(c(53425)); //٥٣٤٢٥
+
+  //Wheather Widget
   if (content === "showWeather") {
     return (
       <div
         style={{
-          minWidth: "360px",
+          minWidth: "200px",
           backgroundColor: "rgb(28 52 91 / 36%)",
           width: "100%",
           color: "white",
-          padding: "20px 40px 0px",
+          padding: "1.25rem 2.5rem 0px",
           borderRadius: "15px",
           boxShadow: "0px 11px 1px rgba(0, 0, 0, 0.05)",
         }}>
@@ -36,14 +53,14 @@ export default function WeatherCard({
           }}>
           <Typography
             variant="h2"
-            sx={{ fontWeight: "400", marginBottom: "-10px" }}>
+            sx={{ fontWeight: "400", marginBottom: "-0.625rem" }}>
             {weather.cityName}
           </Typography>
           <Typography variant="h5" sx={{ fontWeight: "300" }}>
             {dateAndTime}
           </Typography>
         </div>
-        <hr style={{ margin: "20px 0" }} />
+        <hr style={{ margin: "1.25rem 0" }} />
         {/* Content Under City Name */}
         <div
           style={{
@@ -61,7 +78,7 @@ export default function WeatherCard({
                 alignItems: "start",
                 justifyContent: "start",
               }}>
-              {weather.temp} <span style={{ fontSize: "40px" }}>°C</span>
+              {weather.temp} <span style={{ fontSize: "2.5rem" }}>°C</span>
             </Typography>
             <div
               style={{
@@ -90,11 +107,11 @@ export default function WeatherCard({
           {/* Icon And Status */}
           <div>
             <img
-              style={{ width: "160px" }}
+              style={{ width: "10rem" }}
               src={weather.icon}
               alt="Weather Icon"
             />
-            <Typography variant="h6" sx={{ marginTop: "-10px" }}>
+            <Typography variant="h6" sx={{ marginTop: "-0.625rem" }}>
               {t(weather.description)}
             </Typography>
           </div>
@@ -111,9 +128,13 @@ export default function WeatherCard({
         </Button>
       </div>
     );
-  } else if (content === "showLoader") {
+  }
+  //Loader Widget
+  else if (content === "showLoader") {
     return <Backdrop />;
-  } else if (content === "showError") {
+  }
+  //Error Widget
+  else if (content === "showError") {
     return <ErrorMessage />;
   }
 }

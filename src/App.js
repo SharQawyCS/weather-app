@@ -20,13 +20,10 @@ function App() {
   });
 
   const [content, setContent] = useState("showLoader"); //Decide To show loader Or Content
-
   const { t, i18n } = useTranslation(); //calling i18next
-  const [locale, setLocale] = useState("en");
-
+  const [locale, setLocale] = useState("en"); //current language
   const dateAndTime = moment().locale(locale).format("ddd D MMM"); //Date According to locale
-
-  let apiKey = `41df8a613dcf8e7b16ec231a986871b4`;
+  let apiKey = `41df8a613dcf8e7b16ec231a986871b4`; // :)
 
   //Weather Data State
   const [weather, setWeather] = useState({

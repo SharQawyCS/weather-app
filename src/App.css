@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+html {
+  font-size: 16px;
+}
+
 body {
   font-family: "ibm";
   background-color: #0052d0 !important;
