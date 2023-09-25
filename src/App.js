@@ -26,7 +26,6 @@ function App() {
 
   const dateAndTime = moment().locale(locale).format("ddd D MMM"); //Date According to locale
 
-  const [adress, setAdress] = useState({ lon: null, lat: null });
   let apiKey = `41df8a613dcf8e7b16ec231a986871b4`;
 
   //Weather Data State
@@ -47,15 +46,16 @@ function App() {
   //Change Site Lang
   useEffect(() => {
     i18n.changeLanguage(locale);
-  }, [locale, setLocale, i18n]);
+  }, [i18n, locale]);
+  //! ======================================================= //
 
   useEffect(() => {
     //! API TO Get DATA BY LAT AND LONG
-    function getWeather() {
+    function getWeather(lat, lon) {
       let cancelAxios = null;
       axios
         .get(
-          `http://api.openweathermap.org/data/2.5/weather?lat=${adress.lat}&lon=${adress.lon}&APPID=${apiKey}&lang=${locale}`,
+          `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${apiKey}&lang=${locale}`,
           {
             cancelToken: new axios.CancelToken((c) => {
               cancelAxios = c;
@@ -84,40 +84,31 @@ function App() {
         })
 
         //Todo
-        // .catch(function () {
-        //   setContent("showError");
-        // });
+        .catch(function () {
+          setContent("showError");
+        });
 
       return () => {
         cancelAxios(); //To Stop Requset After Getting Info
       };
     }
 
-    //! ////////////////////////////////////////////
-
-    function geoFindMe() {
-      function success(position) {
-        let latitude = position.coords.latitude;
-        let longitude = position.coords.longitude;
-        setAdress({ lon: longitude, lat: latitude });
-        getWeather();
-      }
-
-      function error() {
-        setContent("showError");
-      }
-
-      if (!navigator.geolocation) {
-        setContent("showError");
-      } else {
-        navigator.geolocation.getCurrentPosition(success, error);
-      }
+    function success(position) {
+      let lat = position.coords.latitude;
+      let lon = position.coords.longitude;
+      getWeather(lat, lon);
     }
 
-    //! ////////////////////////////////////////////
+    function error() {
+      setContent("showError");
+    }
 
-    geoFindMe();
-  }, [locale, setLocale, i18n, adress.lon, adress.lat, apiKey]);
+    if (!navigator.geolocation) {
+      setContent("showError");
+    } else {
+      navigator.geolocation.getCurrentPosition(success, error);
+    }
+  }, [apiKey, locale]);
 
   return (
     <div className="App">

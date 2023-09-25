@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import * as React from "react";
 
-export default function SimpleBackdrop(open) {
+export default function SimpleBackdrop() {
   return (
     <div
       style={{
@@ -18,7 +18,6 @@ export default function SimpleBackdrop(open) {
         boxShadow: "0px 11px 1px rgba(0, 0, 0, 0.05)",
       }}>
       <div
-        style={open === false ? { display: "none" } : { display: "block" }}
         className="lds-hourglass"></div>
       <Typography sx={{marginTop:"40px"}} variant="h3">Getting Location...</Typography>
     </div>

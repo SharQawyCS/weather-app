@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Typography } from "@mui/material";
 
 import Backdrop from "./Backdrop";
+import ErrorMessage from "./ErrorMessage";
 
 import "moment/locale/ar";
 
@@ -12,7 +13,7 @@ export default function WeatherCard({
   locale,
   handleChangelanguageClick,
   t,
-  content
+  content,
 }) {
   if (content === "showWeather") {
     return (
@@ -42,7 +43,7 @@ export default function WeatherCard({
             {dateAndTime}
           </Typography>
         </div>
-        <hr />
+        <hr style={{margin:"20px 0"}} />
         {/* Content Under City Name */}
         <div
           style={{
@@ -112,5 +113,7 @@ export default function WeatherCard({
     );
   } else if (content === "showLoader") {
     return <Backdrop />;
+  } else if (content === "showError") {
+    return <ErrorMessage />;
   }
 }
