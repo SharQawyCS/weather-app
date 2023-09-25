@@ -17,9 +17,13 @@ export default function SimpleBackdrop() {
         borderRadius: "15px",
         boxShadow: "0px 11px 1px rgba(0, 0, 0, 0.05)",
       }}>
-      <div
-        className="lds-hourglass"></div>
-      <Typography sx={{marginTop:"40px"}} variant="h3">Getting Location...</Typography>
+      <div className="lds-hourglass"></div>
+      <Typography sx={{ marginTop: "40px" }} variant="h3">
+        Getting Location...
+      </Typography>
     </div>
   );
 }
+
+//Backdrop Page Shows When Waiting For Connection Or Location
+//It is a loader :)

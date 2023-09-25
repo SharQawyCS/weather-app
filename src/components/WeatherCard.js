@@ -12,7 +12,7 @@ export default function WeatherCard({
   dateAndTime,
   locale,
   handleChangelanguageClick,
-  t,
+  t, //Translation Function From i18n.js
   content,
 }) {
   if (content === "showWeather") {
@@ -43,7 +43,7 @@ export default function WeatherCard({
             {dateAndTime}
           </Typography>
         </div>
-        <hr style={{margin:"20px 0"}} />
+        <hr style={{ margin: "20px 0" }} />
         {/* Content Under City Name */}
         <div
           style={{

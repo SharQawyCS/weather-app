@@ -29,3 +29,4 @@ export default function ErrorMessage() {
     </div>
   );
 }
+//Error Page Shows When No Connection Or No Location

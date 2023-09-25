@@ -47,10 +47,9 @@ function App() {
   useEffect(() => {
     i18n.changeLanguage(locale);
   }, [i18n, locale]);
-  //! ======================================================= //
 
   useEffect(() => {
-    //! API TO Get DATA BY LAT AND LONG
+    // API TO Get DATA BY LAT AND LONG
     function getWeather(lat, lon) {
       let cancelAxios = null;
       axios
@@ -62,7 +61,6 @@ function App() {
             }),
           }
         )
-
         .then(function (response) {
           let responseTemp = Math.round(response.data.main.temp - 273);
           let responseCityName = response.data.name;
@@ -82,8 +80,6 @@ function App() {
           });
           setContent("showWeather"); //To Disable Loader And Show Weather Content
         })
-
-        //Todo
         .catch(function () {
           setContent("showError");
         });
@@ -93,6 +89,7 @@ function App() {
       };
     }
 
+    //Get Position [ latitude - longitude ]
     function success(position) {
       let lat = position.coords.latitude;
       let lon = position.coords.longitude;
@@ -139,3 +136,7 @@ function App() {
 }
 
 export default App;
+
+// TODO: Add Lang To Local Storage
+// TODO: Add Search Box , Header , Footer
+// TODO: Change Background Color
