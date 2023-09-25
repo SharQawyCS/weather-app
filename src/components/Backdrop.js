@@ -19,7 +19,7 @@ export default function SimpleBackdrop(open) {
       }}>
       <div
         style={open === false ? { display: "none" } : { display: "block" }}
-        class="lds-hourglass"></div>
+        className="lds-hourglass"></div>
       <Typography sx={{marginTop:"40px"}} variant="h3">Getting Location...</Typography>
     </div>
   );

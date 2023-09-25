@@ -19,7 +19,7 @@ function App() {
     },
   });
 
-  const [content, setContent] = useState("show loader"); //Decide To show loader Or Content
+  const [content, setContent] = useState("showLoader"); //Decide To show loader Or Content
 
   const { t, i18n } = useTranslation(); //calling i18next
   const [locale, setLocale] = useState("en");
@@ -80,16 +80,13 @@ function App() {
             pressure: responsePressure,
             icon: `https://openweathermap.org/img/wn/${responseIcon}@2x.png`,
           });
+          setContent("showWeather"); //To Disable Loader And Show Weather Content
         })
 
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-
-        .finally(function () {
-          // always executed
-        });
+        //Todo
+        // .catch(function () {
+        //   setContent("showError");
+        // });
 
       return () => {
         cancelAxios(); //To Stop Requset After Getting Info
@@ -104,17 +101,15 @@ function App() {
         let longitude = position.coords.longitude;
         setAdress({ lon: longitude, lat: latitude });
         getWeather();
-        console.log("Called getWeather from geoFindMe");
       }
 
       function error() {
-        console.log("Unable to retrieve your location");
+        setContent("showError");
       }
 
       if (!navigator.geolocation) {
-        console.log("Geolocation is not supported by your browser");
+        setContent("showError");
       } else {
-        console.log("Locating…");
         navigator.geolocation.getCurrentPosition(success, error);
       }
     }

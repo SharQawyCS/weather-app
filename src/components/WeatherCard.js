@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Typography } from "@mui/material";
 
 import Backdrop from "./Backdrop";
@@ -108,10 +108,9 @@ export default function WeatherCard({
           variant="text">
           {locale === "en" ? "عربي" : "English"}
         </Button>
-        <Backdrop />
       </div>
     );
-  } else if (content === "show loader") {
+  } else if (content === "showLoader") {
     return <Backdrop />;
   }
 }
