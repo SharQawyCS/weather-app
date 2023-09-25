@@ -22,6 +22,7 @@ function App() {
   const [content, setContent] = useState("showLoader"); //Decide To show loader Or Content
   const { t, i18n } = useTranslation(); //calling i18next
   const [locale, setLocale] = useState("en"); //current language
+
   const dateAndTime = moment().locale(locale).format("ddd D MMM"); //Date According to locale
   let apiKey = `41df8a613dcf8e7b16ec231a986871b4`; // :)
 
@@ -86,17 +87,15 @@ function App() {
       };
     }
 
-    //Get Position [ latitude - longitude ]
+    //Get Position [ latitude - longitude ] And Call getWeather
     function success(position) {
       let lat = position.coords.latitude;
       let lon = position.coords.longitude;
       getWeather(lat, lon);
     }
-
     function error() {
       setContent("showError");
     }
-
     if (!navigator.geolocation) {
       setContent("showError");
     } else {
@@ -137,3 +136,4 @@ export default App;
 // TODO: Add Lang To Local Storage
 // TODO: Add Search Box , Header , Footer
 // TODO: Change Background Color
+// TODO: Add Loader When Locate Changing

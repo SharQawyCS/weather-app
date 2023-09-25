@@ -78,7 +78,8 @@ export default function WeatherCard({
                 alignItems: "start",
                 justifyContent: "start",
               }}>
-              {weather.temp} <span style={{ fontSize: "2.5rem" }}>°C</span>
+              {c(weather.temp)}{" "}
+              <span style={{ fontSize: "1.5rem" }}>{t("°C")}</span>
             </Typography>
             <div
               style={{
@@ -89,17 +90,17 @@ export default function WeatherCard({
               }}>
               <p>
                 {t("Humidity: ")}
-                {weather.humidity}
+                {c(weather.humidity)}
                 {t(" g/kg")}
               </p>
               <p>
                 {t("Wind speed: ")}
-                {weather.windSpeed}
+                {c(weather.windSpeed)}
                 {t(" km/h")}
               </p>
               <p>
                 {t("Pressure: ")}
-                {weather.pressure}
+                {c(weather.pressure)}
                 {t(" millibar")}
               </p>
             </div>
