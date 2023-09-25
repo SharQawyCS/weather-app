@@ -10,40 +10,7 @@ p {
   margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-/*? Fonts */
-@font-face {
-  font-family: ibm;
-  src: url(../public/fonts/IBM_Plex_Sans_Arabic/IBMPlexSansArabic-Thin.ttf);
-  font-weight: 100;
-}
-@font-face {
-  font-family: ibm;
-  src: url(../public/fonts/IBM_Plex_Sans_Arabic/IBMPlexSansArabic-ExtraLight.ttf);
-  font-weight: 200;
-}
+/* IBM Fonts */
 @font-face {
   font-family: ibm;
   src: url(../public/fonts/IBM_Plex_Sans_Arabic/IBMPlexSansArabic-Light.ttf);
@@ -59,9 +26,4 @@ p {
   font-family: ibm;
   src: url(../public/fonts/IBM_Plex_Sans_Arabic/IBMPlexSansArabic-Medium.ttf);
   font-weight: 500;
-}
-@font-face {
-  font-family: ibm;
-  src: url(../public/fonts/IBM_Plex_Sans_Arabic/IBMPlexSansArabic-Bold.ttf);
-  font-weight: 600;
 }

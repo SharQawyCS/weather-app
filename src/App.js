@@ -1,17 +1,31 @@
 import "./App.css";
-import { createTheme, ThemeProvider, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+
+//From libraries
 import axios from "axios";
 import moment from "moment";
+import "moment/locale/ar";
+import { useTranslation } from "react-i18next";
 
 //MUI
+import { createTheme, ThemeProvider, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 
 let cancelAxios = null;
 
 function App() {
-  const dateAndTime = moment().format("ddd D MMM");
+  const theme = createTheme({
+    typography: {
+      fontFamily: ["ibm"], //Main Font
+    },
+  });
+
+  const { t, i18n } = useTranslation(); //calling i18next
+  const [locale, setLocale] = useState("en");
+
+  const dateAndTime = moment().locale(locale).format("ddd D MMM"); //Date According to locale
+
   const [weather, setWeather] = useState({
     cityName: "",
     temp: null,
@@ -22,20 +36,24 @@ function App() {
     icon: "",
   });
 
-  const theme = createTheme({
-    typography: {
-      fontFamily: ["ibm"],
-    },
-  });
+  function handleChangelanguageClick() {
+    locale === "en" ? setLocale("ar") : setLocale("en");
+  }
+
+  //Change Site Lang
+  useEffect(() => {
+    i18n.changeLanguage(locale);
+  }, [locale, setLocale, i18n]);
 
   useEffect(() => {
     let lat = "30.0444";
     let lon = "31.2357";
     let apiKey = `41df8a613dcf8e7b16ec231a986871b4`;
 
+    //API request
     axios
       .get(
-        `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${apiKey}&lang=en`,
+        `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${apiKey}&lang=${locale}`,
         {
           cancelToken: new axios.CancelToken((c) => {
             cancelAxios = c;
@@ -68,102 +86,114 @@ function App() {
         // always executed
       });
     return () => {
-      console.log("canceling");
-      cancelAxios();
+      cancelAxios(); //To Stop Requset After Getting Info
     };
-  }, []);
+  }, [locale, setLocale, i18n]);
 
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-        <Container maxWidth="sm">
+        <Container
+          maxWidth="sm"
+          dir={locale === "ar" ? "rtl" : "ltr"}
+          style={{
+            minHeight: "100vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}>
+          {/* Card */}
           <div
             style={{
-              minHeight: "100vh",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              backgroundColor: "rgb(28 52 91 / 36%)",
+              width: "100%",
+              color: "white",
+              padding: "20px 40px 0px",
+              borderRadius: "15px",
+              boxShadow: "0px 11px 1px rgba(0, 0, 0, 0.05)",
             }}>
-            {/* Card */}
+            {/* City And Date */}
             <div
               style={{
-                backgroundColor: "rgb(28 52 91 / 36%)",
-                width: "100%",
-                color: "white",
-                padding: "20px 40px 0px",
-                borderRadius: "15px",
-                boxShadow: "0px 11px 1px rgba(0, 0, 0, 0.05)",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "end",
               }}>
-              {/* City And Date */}
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "end",
-                }}>
-                <Typography
-                  variant="h2"
-                  sx={{ fontWeight: "400", marginBottom: "-10px" }}>
-                  {weather.cityName}
-                </Typography>
-                <Typography variant="h5" sx={{ fontWeight: "300" }}>
-                  {dateAndTime}
-                </Typography>
-              </div>
-              <hr />
-              {/* Content Under City Name */}
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}>
-                {/* All Temps  */}
-                <div>
-                  <Typography
-                    variant="h1"
-                    sx={{
-                      display: "flex",
-                      alignItems: "start",
-                      justifyContent: "start",
-                    }}>
-                    {weather.temp} <span style={{ fontSize: "40px" }}>°C</span>
-                  </Typography>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "start",
-                      fontWeight: "500",
-                    }}>
-                    <p>Humidity: {weather.humidity} g/kg</p>
-                    <p>Wind speed: {weather.windSpeed} km/h</p>
-                    <p> Pressure: {weather.pressure} millibar</p>
-                  </div>
-                </div>
-                {/* Icon And Status */}
-                <div>
-                  <img
-                    style={{ width: "160px" }}
-                    src={weather.icon}
-                    alt="Weather Icon"
-                  />
-                  <Typography variant="h6" sx={{ marginTop: "-8px" }}>
-                    {weather.description}
-                  </Typography>
-                </div>
-              </div>
-              <Button
-                sx={{
-                  position: "relative",
-                  bottom: "-40px !important",
-                  left: "-255px !important",
-                }}
-                variant="text">
-                العربية
-              </Button>
+              <Typography
+                variant="h2"
+                sx={{ fontWeight: "400", marginBottom: "-10px" }}>
+                {weather.cityName}
+              </Typography>
+              <Typography variant="h5" sx={{ fontWeight: "300" }}>
+                {dateAndTime}
+              </Typography>
             </div>
+            <hr />
+            {/* Content Under City Name */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}>
+              {/* All Temps  */}
+              <div>
+                <Typography
+                  variant="h1"
+                  sx={{
+                    display: "flex",
+                    alignItems: "start",
+                    justifyContent: "start",
+                  }}>
+                  {weather.temp} <span style={{ fontSize: "40px" }}>°C</span>
+                </Typography>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "start",
+                    fontWeight: "500",
+                  }}>
+                  <p>
+                    {t("Humidity: ")}
+                    {weather.humidity}
+                    {t(" g/kg")}
+                  </p>
+                  <p>
+                    {t("Wind speed: ")}
+                    {weather.windSpeed}
+                    {t(" km/h")}
+                  </p>
+                  <p>
+                    {t("Pressure: ")}
+                    {weather.pressure}
+                    {t(" millibar")}
+                  </p>
+                </div>
+              </div>
+              {/* Icon And Status */}
+              <div>
+                <img
+                  style={{ width: "160px" }}
+                  src={weather.icon}
+                  alt="Weather Icon"
+                />
+                <Typography variant="h6" sx={{ marginTop: "-10px" }}>
+                  {t(weather.description)}
+                </Typography>
+              </div>
+            </div>
+            <Button
+              onClick={handleChangelanguageClick}
+              sx={{
+                position: "relative",
+                bottom: "-40px !important",
+                left: "-255px !important",
+              }}
+              variant="text">
+              {locale === "en" ? "عربي" : "English"}
+            </Button>
           </div>
         </Container>
       </ThemeProvider>
