@@ -28,8 +28,6 @@ export default function WeatherCard({
     }
   };
 
-  console.log(c(53425)); //٥٣٤٢٥
-
   //Wheather Widget
   if (content === "showWeather") {
     return (

@@ -132,14 +132,15 @@ function App() {
           />
           {/* ====== Card ======= */}
           <Typography
+            
             sx={{
+              letterSpacing: locale === "ar" ? "1px" : "3px",
               color: "#d5c1ff",
-              letterSpacing: "3px",
               fontWeight: "bold",
               position: "fixed",
               bottom: "1.5rem",
             }}>
-            Made With Love In EGYPT 🇪🇬💜
+            {t("Made With Love In EGYPT")} 🇪🇬💜
           </Typography>
         </Container>
       </ThemeProvider>
