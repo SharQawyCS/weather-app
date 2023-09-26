@@ -64,3 +64,29 @@ p {
     transform: rotate(1800deg);
   }
 }
+
+@media only screen and (max-width: 350px) {
+  html {
+    font-size: 8px;
+  }
+}
+@media only screen and (min-width: 350px) {
+  html {
+    font-size: 10px;
+  }
+}
+@media only screen and (min-width: 450px) {
+  html {
+    font-size: 12px;
+  }
+}
+@media only screen and (min-width: 550px) {
+  html {
+    font-size: 14px;
+  }
+}
+@media only screen and (min-width: 700px) {
+  html {
+    font-size: 16px;
+  }
+}

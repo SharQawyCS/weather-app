@@ -4,7 +4,7 @@ import WeatherCard from "./components/WeatherCard";
 
 //From libraries
 import axios from "axios";
-import moment, { locale } from "moment";
+import moment from "moment";
 import "moment/locale/ar";
 import { useTranslation } from "react-i18next";
 
@@ -40,14 +40,8 @@ function App() {
   function handleChangelanguageClick() {
     const newLocale = locale === "en" ? "ar" : "en";
     setLocale(newLocale);
-    localStorage.setItem("locale", newLocale); // تخزين القيمة في local storage
+    localStorage.setItem("locale", newLocale);
   }
-
-  useEffect(() => {}, [i18n, locale]);
-  //Change Site Lang
-  // useEffect(() => {
-  //   i18n.changeLanguage(locale);
-  // }, [i18n, locale]);
 
   useEffect(() => {
     const storedLocale = localStorage.getItem("locale");
@@ -57,7 +51,7 @@ function App() {
 
     // API TO Get DATA BY LAT AND LONG
     function getWeather(lat, lon) {
-      setContent("showLoader")
+      setContent("showLoader");
       let cancelAxios = null;
       axios
         .get(
@@ -121,8 +115,10 @@ function App() {
           maxWidth="sm"
           dir={locale === "ar" ? "rtl" : "ltr"}
           style={{
+
             minHeight: "100vh",
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
           }}>
@@ -144,5 +140,5 @@ function App() {
 
 export default App;
 
-// TODO: Add Search Box , Header , Footer
 // TODO: Add Made With
+//TODO: Make It Responsive

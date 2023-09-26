@@ -23,8 +23,7 @@ export default function ErrorMessage() {
         <span style={{ color: "#ff3333", fontWeight: "bold" }}>
           Can Not Get Location!
         </span>{" "}
-        Please Check That You Enable Location, Or You Can Type Your Location
-        Manually.
+        Please Check That You Enabled Location And Intertet Connection.
       </Typography>
     </div>
   );

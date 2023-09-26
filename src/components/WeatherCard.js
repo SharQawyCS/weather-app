@@ -1,9 +1,8 @@
 import React from "react";
-import { Button, Typography } from "@mui/material";
-
 import Backdrop from "./Backdrop";
 import ErrorMessage from "./ErrorMessage";
 
+import { Button, Typography } from "@mui/material";
 import "moment/locale/ar";
 
 //Main Fn
@@ -120,6 +119,7 @@ export default function WeatherCard({
         <Button
           onClick={handleChangelanguageClick}
           sx={{
+            color:"#d5c1ff",
             position: "relative",
             bottom: "-40px !important",
             left: "-50% !important",
