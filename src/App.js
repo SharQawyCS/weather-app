@@ -4,7 +4,7 @@ import WeatherCard from "./components/WeatherCard";
 
 //From libraries
 import axios from "axios";
-import moment from "moment";
+import moment, { locale } from "moment";
 import "moment/locale/ar";
 import { useTranslation } from "react-i18next";
 
@@ -38,21 +38,30 @@ function App() {
   });
 
   function handleChangelanguageClick() {
-    locale === "en" ? setLocale("ar") : setLocale("en");
+    const newLocale = locale === "en" ? "ar" : "en";
+    setLocale(newLocale);
+    localStorage.setItem("locale", newLocale); // تخزين القيمة في local storage
   }
 
+  useEffect(() => {}, [i18n, locale]);
   //Change Site Lang
-  useEffect(() => {
-    i18n.changeLanguage(locale);
-  }, [i18n, locale]);
+  // useEffect(() => {
+  //   i18n.changeLanguage(locale);
+  // }, [i18n, locale]);
 
   useEffect(() => {
+    const storedLocale = localStorage.getItem("locale");
+    if (storedLocale) {
+      setLocale(storedLocale);
+    }
+
+    // let locale = storedLocale;
     // API TO Get DATA BY LAT AND LONG
     function getWeather(lat, lon) {
       let cancelAxios = null;
       axios
         .get(
-          `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${apiKey}&lang=${locale}`,
+          `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${apiKey}&lang=${storedLocale}`,
           {
             cancelToken: new axios.CancelToken((c) => {
               cancelAxios = c;
@@ -101,7 +110,9 @@ function App() {
     } else {
       navigator.geolocation.getCurrentPosition(success, error);
     }
-  }, [apiKey, locale]);
+
+    i18n.changeLanguage(locale);
+  }, [apiKey, i18n, locale]);
 
   return (
     <div className="App">
@@ -133,7 +144,5 @@ function App() {
 
 export default App;
 
-// TODO: Add Lang To Local Storage
 // TODO: Add Search Box , Header , Footer
-// TODO: Change Background Color
-// TODO: Add Loader When Locate Changing
+// TODO: Add Made With
