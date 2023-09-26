@@ -122,10 +122,10 @@ export default function WeatherCard({
           sx={{
             position: "relative",
             bottom: "-40px !important",
-            left: "-255px !important",
+            left: "-50% !important",
           }}
           variant="text">
-          {locale === "en" ? "عربي" : "English"}
+          {locale === "en" ? "اللُغَةُ العَرَبِيَّةُ" : "English"}
         </Button>
       </div>
     );

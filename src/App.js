@@ -55,9 +55,9 @@ function App() {
       setLocale(storedLocale);
     }
 
-    // let locale = storedLocale;
     // API TO Get DATA BY LAT AND LONG
     function getWeather(lat, lon) {
+      setContent("showLoader")
       let cancelAxios = null;
       axios
         .get(
