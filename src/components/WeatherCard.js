@@ -35,9 +35,9 @@ export default function WeatherCard({
     return (
       <div
         style={{
-          minWidth: "200px",
+          minWidth: "150px",
           backgroundColor: "rgb(28 52 91 / 36%)",
-          width: "100%",
+          width: "90%",
           color: "white",
           padding: "1.25rem 2.5rem 0px",
           borderRadius: "15px",
@@ -119,7 +119,7 @@ export default function WeatherCard({
         <Button
           onClick={handleChangelanguageClick}
           sx={{
-            color:"#d5c1ff",
+            color: "#d5c1ff",
             position: "relative",
             bottom: "-40px !important",
             left: "-50% !important",

@@ -7,13 +7,13 @@ export default function SimpleBackdrop() {
       style={{
         minHeight: "360px",
         backgroundColor: "rgb(28 52 91 / 36%)",
-        width: "100%",
+        width: "90%",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
         color: "white",
-        padding: "20px 40px 0px",
+        padding: "1.25rem 2.5rem 0px",
         borderRadius: "15px",
         boxShadow: "0px 11px 1px rgba(0, 0, 0, 0.05)",
       }}>
