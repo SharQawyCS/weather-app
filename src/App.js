@@ -9,7 +9,7 @@ import "moment/locale/ar";
 import { useTranslation } from "react-i18next";
 
 //MUI
-import { createTheme, ThemeProvider } from "@mui/material";
+import { createTheme, ThemeProvider, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 
 function App() {
@@ -115,7 +115,6 @@ function App() {
           maxWidth="sm"
           dir={locale === "ar" ? "rtl" : "ltr"}
           style={{
-
             minHeight: "100vh",
             display: "flex",
             flexDirection: "column",
@@ -132,6 +131,16 @@ function App() {
             content={content}
           />
           {/* ====== Card ======= */}
+          <Typography
+            sx={{
+              color: "#d5c1ff",
+              letterSpacing: "3px",
+              fontWeight: "bold",
+              position: "fixed",
+              bottom: "1.5rem",
+            }}>
+            Made With Love In EGYPT 🇪🇬💜
+          </Typography>
         </Container>
       </ThemeProvider>
     </div>
@@ -139,6 +148,3 @@ function App() {
 }
 
 export default App;
-
-// TODO: Add Made With
-//TODO: Make It Responsive
